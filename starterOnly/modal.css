@@ -145,9 +145,12 @@ main {
 }
 
 .confirm_message{
+  display: flex;
   font-size: 36px;
+  height: 630px;
   font-weight: 400;
   text-align: center;
+  align-items: center;
 }
 
 .button {
