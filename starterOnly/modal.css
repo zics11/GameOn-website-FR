@@ -202,6 +202,10 @@ main {
   margin: 15px auto;
 }
 
+.formData {
+  position: relative;
+}
+
 label {
   font-family: var(--font-default);
   font-size: 15px;
