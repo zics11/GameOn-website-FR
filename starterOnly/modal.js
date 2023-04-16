@@ -64,24 +64,35 @@ function cofirmMessage(event) {
 // DOM : //
 const inputFirst = document.querySelector("#first");
 const inputLast = document.querySelector("#last");
+const inputEmail = document.querySelector("#email");
+const inputDate = document.querySelector("#birthdate");
+const inputQuantity = document.querySelector("#quantity");
+const inputRadio = document.querySelectorAll('[type="radio"]');
+const inputCheckbox = document.querySelectorAll(']');
+
 
 //liste message
 const message = {
   first: "Veuillez entrer 2 caractères valide ou plus pour le champ du prénom.",
   last: "Veuillez entrer 2 caractères valide ou plus pour le champ du nom.",
+  email: "Veuillez entrer un email valide.",
+  date: "Veuillez entrer une date de naissance.",
+  quantity: "Veuillez entrer un nombre.",
+  radio : "Vous devez choisir une option.",
+  radio : "Vous devez choisir une option.",
+
 }
-//Valider prénom//
+
+
+//Valide  prénom//
 submitBtn[0].addEventListener("click", validateFirst);
 
 function validateFirst() {
   let inputLenght = inputFirst.value.length;
-  let inputValue = inputFirst.value
-  let regex = /[a-zA-Z]+$/;
-  if(inputLenght<2 || !regex.test(inputValue)) {
-    afficherErreur(inputFirst,message.first)
-  }
-  else {
-    suprimerErreur(inputFirst)
+  if(inputLenght<2) {
+    afficherErreur(inputFirst,message.first);
+  }else{
+    suprimerErreur(inputFirst);
   }
 }
 
@@ -90,36 +101,86 @@ submitBtn[0].addEventListener("click", validateLast);
 
 function validateLast() {
   let inputLenght = inputLast.value.length;
-  let inputValue = inputLast.value
-  let regex = /[a-zA-Z]+$/;
-  if(inputLenght<2 || !regex.test(inputValue)) {
-    afficherErreur(inputLast,message.last)
-  }
-  else {
-    suprimerErreur(inputLast)
+  if(inputLenght<2) {
+    afficherErreur(inputLast,message.last);
+  }else{
+    suprimerErreur(inputLast);
   }
 }
 
+//Valider email//
+submitBtn[0].addEventListener("click", validateEmail);
+
+function validateEmail() {
+  let inputValue = inputEmail.value
+  let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if(!regex.test(inputValue)) {
+    afficherErreur(inputEmail,message.email);
+  }else{
+    suprimerErreur(inputEmail);
+  }
+}
+
+//Valider date//
+submitBtn[0].addEventListener("click", validateDate);
+
+function validateDate() {
+  if(!inputDate.value) {
+    afficherErreur(inputDate,message.date);
+  }else{
+    suprimerErreur(inputDate);
+  }
+}
+
+//Valider tounois//
+submitBtn[0].addEventListener("click", validateQuantity);
+
+function validateQuantity() {
+  let regex = /[0-9]+$/;
+  if(!inputQuantity.value || !regex.test(inputQuantity.value)) {
+    afficherErreur(inputQuantity,message.quantity);
+  }else{
+    suprimerErreur(inputQuantity);
+  }
+}
+
+//valider checkbox//
+submitBtn[0].addEventListener("click", validateCheckbox);
+
+function validateCheckbox() {
+  let error = true;
+  inputRadio.forEach(item => {
+    if (item.checked) {
+      error = false;
+    }
+  });
+  if(error) {
+    afficherErreur(inputRadio[5],message.radio);
+  }else{
+    suprimerErreur(inputRadio[5]);
+  }
+}
 
 // Afficher erreur//
 function afficherErreur(inputDom, msg){
   let parentDiv = inputDom.parentNode
-  if(!parentDiv.querySelector(".error")){
+  if(!parentDiv.querySelector('p')){
     let newDiv = document.createElement("p");
     let messageError = document.createTextNode(msg);
     newDiv.appendChild(messageError);
-    newDiv.style.fontSize = "13px";
-    newDiv.style.color = "red";
+    newDiv.style.fontSize = "12px";
+    newDiv.style.color = "orange";
     newDiv.style.position = "absolute";
-    newDiv.className = "error";
     parentDiv.insertBefore(newDiv,inputDom.nextSibling);
   }
 }
 
 //Suprimmer erreur//
 function suprimerErreur(inputDom) {
-  let parentDiv = inputDom.parentNode;
-  let newDiv = document.querySelector(".error")
-  let delDiv = parentDiv.removeChild(newDiv)
+  let parentDiv = inputDom.parentElement;
+  let newDiv = parentDiv.querySelector('p');
+  console.log("parentd",parentDiv);
+  console.log("newd",newDiv);
+  parentDiv.removeChild(newDiv);
 }
 
