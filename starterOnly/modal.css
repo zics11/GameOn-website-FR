@@ -31,8 +31,9 @@ img {
 }
 
 .topnav {
-  overflow: hidden;
+  /* overflow: hidden; */
   margin: 3.5%;
+  position: relative;
 }
 .header-logo {
     float: left;
@@ -74,6 +75,10 @@ img {
   .topnav a.icon {
     float: right;
     display: block;
+    color: #ff0000 ;
+  }
+  a.icon:hover{
+    color: #fff;
   }
 }
 
@@ -83,11 +88,22 @@ img {
     position: absolute;
     right: 0;
     top: 0;
+    color: #fff;
   }
   .topnav.responsive a {
     float: none;
     display: block;
     text-align: left;
+    z-index: 1000;
+  }
+  .main-navbar {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    width: 300px;
+    background-color: #fff;
+
   }
 }
 
@@ -518,7 +534,7 @@ footer {
   .hero-content {
     background: #fff;
     color: #000;
-    padding: 20px;
+    padding: 0px;
   }
   .hero-content::after {
     content: unset;

@@ -10,7 +10,6 @@ function editNav() {
 
 // DOM Elements
 const modalbg = document.querySelector(".bground");
-console.log(modalbg)
 const heroSec = document.querySelector(".hero-section");
 const submitBtn = document.querySelectorAll(".btn-submit");
 const reservSec = document.querySelector(".reserv");
@@ -58,8 +57,19 @@ submitBtn[0].addEventListener("click", cofirmMessage)
 
 function cofirmMessage(event) {
   event.preventDefault()
-  // confirmSec.style.display = "block";
-  // reservSec.style.display = "none";
+  console.log("first",validateFirst())
+  console.log("last",validateLast())
+  console.log("email",validateEmail())
+  console.log("date",validateDate())
+  console.log("qtt",validateQuantity())
+  console.log("radio",validateRadio())
+  console.log("check",validateCheckbox())
+
+  if (validateFirst() && validateLast() && validateEmail() && validateDate() && validateQuantity() && validateRadio() && validateCheckbox()){
+    console.log("ok");
+    confirmSec.style.display = "block";
+    reservSec.style.display = "none";
+  }
 }
 
 // VALIDATION FORMULAIRE//
@@ -74,7 +84,7 @@ const domRadio = document.querySelectorAll(".checkbox-label");
 const inputCheckbox = document.querySelector("#checkbox1");
 const domCheckbox = document.querySelectorAll(".checkbox2-label");
 const domAllError = [inputFirst, inputLast, inputEmail, inputDate, inputQuantity, domRadio[5], domCheckbox[1]];
-
+const listFonctionValidation = [ validateFirst, validateLast, validateEmail, validateDate, validateQuantity, validateRadio, validateCheckbox]
 
 //liste message
 const message = {
@@ -87,7 +97,6 @@ const message = {
   checkbox: "Vous devez acceptez les termes et conditions.",
 }
 
-
 //Valide  prénom//
 submitBtn[0].addEventListener("click", validateFirst);
 
@@ -95,8 +104,10 @@ function validateFirst() {
   let inputLenght = inputFirst.value.length;
   if (inputLenght < 2) {
     afficherErreur(inputFirst, message.first);
+    return false
   } else {
     suprimerErreur(inputFirst);
+    return true
   }
 }
 
@@ -107,9 +118,12 @@ function validateLast() {
   let inputLenght = inputLast.value.length;
   if (inputLenght < 2) {
     afficherErreur(inputLast, message.last);
+    return false
   } else {
     suprimerErreur(inputLast);
+    return true
   }
+
 }
 
 //Valider email//
@@ -120,9 +134,12 @@ function validateEmail() {
   let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (!regex.test(inputValue)) {
     afficherErreur(inputEmail, message.email);
+    return false
   } else {
     suprimerErreur(inputEmail);
+    return true
   }
+
 }
 
 //Valider date//
@@ -131,8 +148,10 @@ submitBtn[0].addEventListener("click", validateDate);
 function validateDate() {
   if (!inputDate.value) {
     afficherErreur(inputDate, message.date);
+    return false
   } else {
     suprimerErreur(inputDate);
+    return true
   }
 }
 
@@ -143,8 +162,10 @@ function validateQuantity() {
   let regex = /[0-9]+$/;
   if (!inputQuantity.value || !regex.test(inputQuantity.value)) {
     afficherErreur(inputQuantity, message.quantity);
+    return false
   } else {
     suprimerErreur(inputQuantity);
+    return true
   }
 }
 
@@ -160,8 +181,10 @@ function validateRadio() {
   });
   if (error) {
     afficherErreur(domRadio[5], message.radio);
+    return false
   } else {
     suprimerErreur(domRadio[5]);
+    return true
   }
 }
 
@@ -171,15 +194,16 @@ submitBtn[0].addEventListener("click", validateCheckbox);
 function validateCheckbox() {
   if (!inputCheckbox.checked) {
     afficherErreur(domCheckbox[1], message.checkbox);
+    return false
   } else {
     suprimerErreur(domCheckbox[1]);
+    return true
   }
 }
 
 // Afficher erreur//
 function afficherErreur(inputDom, msg) {
   let parentDiv = inputDom.parentNode
-  console.log("parentDiv", parentDiv);
   if (!parentDiv.querySelector('p')) {
     let newDiv = document.createElement("p");
     let messageError = document.createTextNode(msg);
@@ -195,9 +219,9 @@ function afficherErreur(inputDom, msg) {
 //Suprimmer erreur//
 function suprimerErreur(inputDom) {
   let parentDiv = inputDom.parentElement;
-  let newDiv = parentDiv.querySelector('p');
-  console.log("parentd", parentDiv);
-  console.log("newd", newDiv);
-  parentDiv.removeChild(newDiv);
+  if (parentDiv.querySelector('p')) {
+    let newDiv = parentDiv.querySelector('p');
+    parentDiv.removeChild(newDiv);
+  }
 }
 
