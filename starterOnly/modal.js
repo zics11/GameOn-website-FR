@@ -57,14 +57,8 @@ submitBtn[0].addEventListener("click", cofirmMessage)
 
 function cofirmMessage(event) {
   event.preventDefault()
-  console.log("first",validateFirst())
-  console.log("last",validateLast())
-  console.log("email",validateEmail())
-  console.log("date",validateDate())
-  console.log("qtt",validateQuantity())
-  console.log("radio",validateRadio())
-  console.log("check",validateCheckbox())
 
+  // vérifie que tous les entrées du fomulaire sont valident //
   if (validateFirst() && validateLast() && validateEmail() && validateDate() && validateQuantity() && validateRadio() && validateCheckbox()){
     console.log("ok");
     confirmSec.style.display = "block";
@@ -202,6 +196,7 @@ function validateCheckbox() {
 }
 
 // Afficher erreur//
+// fonction qui affiche un méssage d'érreu personalisé suivant l'entrée du formulaire//
 function afficherErreur(inputDom, msg) {
   let parentDiv = inputDom.parentNode
   if (!parentDiv.querySelector('p')) {
@@ -217,6 +212,7 @@ function afficherErreur(inputDom, msg) {
 }
 
 //Suprimmer erreur//
+// fonction qui suprime le méssage d'érreur personalisé suivant l'entrée du formulaire quant celui ci est corrigé//
 function suprimerErreur(inputDom) {
   let parentDiv = inputDom.parentElement;
   if (parentDiv.querySelector('p')) {
