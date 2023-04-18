@@ -16,7 +16,7 @@ const reservSec = document.querySelector(".reserv");
 const confirmSec = document.querySelector(".confirm");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
-const closeBtn = document.querySelectorAll(".close")
+const closeBtn = document.querySelectorAll(".close");
 
 
 // launch modal event
@@ -38,13 +38,14 @@ function launchModal() {
 
 //close Modal//
 closeBtn[0].addEventListener("click", closeModal);
-submitBtn[1].addEventListener("click", closeModal)
+submitBtn[1].addEventListener("click", closeModal);
 
 
 function closeModal() {
   heroSec.style.visibility = "visible";
   modalbg.style.display = "none";
   confirmSec.style.display = "none";
+  reservSec.style.display = "block";
   heroSec.style.height = "auto";
   document.reserve.reset();
   domAllError.forEach(suprimerErreur);
@@ -52,7 +53,7 @@ function closeModal() {
 
 //Cofirm message//
 
-submitBtn[0].addEventListener("click", cofirmMessage)
+submitBtn[0].addEventListener("click", cofirmMessage);
 
 function cofirmMessage(event) {
   event.preventDefault()
@@ -95,10 +96,10 @@ function validateFirst() {
   let inputLenght = inputFirst.value.length;
   if (inputLenght < 2) {
     afficherErreur(inputFirst, message.first);
-    return false
+    return false;
   } else {
     suprimerErreur(inputFirst);
-    return true
+    return true;
   }
 }
 
@@ -109,10 +110,10 @@ function validateLast() {
   let inputLenght = inputLast.value.length;
   if (inputLenght < 2) {
     afficherErreur(inputLast, message.last);
-    return false
+    return false;
   } else {
     suprimerErreur(inputLast);
-    return true
+    return true;
   }
 
 }
@@ -121,14 +122,14 @@ function validateLast() {
 submitBtn[0].addEventListener("click", validateEmail);
 
 function validateEmail() {
-  let inputValue = inputEmail.value
+  let inputValue = inputEmail.value;
   let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (!regex.test(inputValue)) {
     afficherErreur(inputEmail, message.email);
-    return false
+    return false;
   } else {
     suprimerErreur(inputEmail);
-    return true
+    return true;
   }
 
 }
@@ -139,10 +140,10 @@ submitBtn[0].addEventListener("click", validateDate);
 function validateDate() {
   if (!inputDate.value) {
     afficherErreur(inputDate, message.date);
-    return false
+    return false;
   } else {
     suprimerErreur(inputDate);
-    return true
+    return true;
   }
 }
 
@@ -153,10 +154,10 @@ function validateQuantity() {
   let regex = /[0-9]+$/;
   if (!inputQuantity.value || !regex.test(inputQuantity.value)) {
     afficherErreur(inputQuantity, message.quantity);
-    return false
+    return false;
   } else {
     suprimerErreur(inputQuantity);
-    return true
+    return true;
   }
 }
 
@@ -172,10 +173,10 @@ function validateRadio() {
   });
   if (error) {
     afficherErreur(domRadio[5], message.radio);
-    return false
+    return false;
   } else {
     suprimerErreur(domRadio[5]);
-    return true
+    return true;
   }
 }
 
@@ -185,10 +186,10 @@ submitBtn[0].addEventListener("click", validateCheckbox);
 function validateCheckbox() {
   if (!inputCheckbox.checked) {
     afficherErreur(domCheckbox[1], message.checkbox);
-    return false
+    return false;
   } else {
     suprimerErreur(domCheckbox[1]);
-    return true
+    return true;
   }
 }
 
@@ -201,7 +202,7 @@ function afficherErreur(inputDom, msg) {
     let messageError = document.createTextNode(msg);
     newDiv.appendChild(messageError);
     newDiv.style.fontSize = "12px";
-    newDiv.style.color = "orange";
+    newDiv.style.color = "red";
     newDiv.style.paddingBottom = "0px";
     // newDiv.style.position = "absolute";
     parentDiv.insertBefore(newDiv, inputDom.nextSibling);
