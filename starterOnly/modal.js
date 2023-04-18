@@ -45,7 +45,6 @@ function closeModal() {
   heroSec.style.visibility = "visible";
   modalbg.style.display = "none";
   confirmSec.style.display = "none";
-  reservSec.style.display = "block";
   heroSec.style.height = "auto";
   document.reserve.reset();
   domAllError.forEach(suprimerErreur);
@@ -59,8 +58,7 @@ function cofirmMessage(event) {
   event.preventDefault()
 
   // vérifie que tous les entrées du fomulaire sont valident //
-  if (validateFirst() && validateLast() && validateEmail() && validateDate() && validateQuantity() && validateRadio() && validateCheckbox()){
-    console.log("ok");
+  if (validateFirst() && validateLast() && validateEmail() && validateDate() && validateQuantity() && validateRadio() && validateCheckbox()) {
     confirmSec.style.display = "block";
     reservSec.style.display = "none";
   }
@@ -78,7 +76,6 @@ const domRadio = document.querySelectorAll(".checkbox-label");
 const inputCheckbox = document.querySelector("#checkbox1");
 const domCheckbox = document.querySelectorAll(".checkbox2-label");
 const domAllError = [inputFirst, inputLast, inputEmail, inputDate, inputQuantity, domRadio[5], domCheckbox[1]];
-const listFonctionValidation = [ validateFirst, validateLast, validateEmail, validateDate, validateQuantity, validateRadio, validateCheckbox]
 
 //liste message
 const message = {
